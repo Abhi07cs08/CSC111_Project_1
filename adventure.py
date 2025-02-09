@@ -73,7 +73,10 @@ class AdventureGame:
         # Suggested attributes (you can remove and track these differently if you wish to do so):
         self.current_location_id = initial_location_id  # game begins at this location
         self.ongoing = True  # whether the game is ongoing
+        self.current_inventory = [] #inintialise inventory
+        self.event_log = EventList()  # Initialize event log to track game events
 
+        
     @staticmethod
     def _load_game_data(filename: str) -> tuple[dict[int, Location], list[Item]]:
         """Load locations and items from a JSON file with the given filename and
@@ -106,6 +109,44 @@ class AdventureGame:
         else:
             return self._locations[loc_id]
 
+    def pick_up_item(self, item_name: str) -> None:
+        """
+        Pick up an item from the current location and add it to the inventory.
+
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.pick_up_item('lucky mug')
+        You have picked up the lucky mug.
+
+        >>> game.pick_up_item('nonexistent item')
+        There is no such item here.
+        """
+        if item_name in self._locations[self.current_location_id].items:
+            self.current_inventory.append(item_name)
+            return
+        else:
+            print("There is no such item here.")
+            return
+
+    def drop_item(self, item_name: str) -> None:
+        """
+        Drop an item from the inventory at the current location.
+
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.pick_up_item('lucky mug')
+        You have picked up the lucky mug.
+        >>> game.drop_item('lucky mug')
+        You have dropped the lucky mug.
+
+        >>> game.drop_item('nonexistent item')
+        You don't have that item in your inventory.
+        """
+        if item_name in self.current_inventory:
+            self.current_inventory.remove(item_name)
+            return
+        else:
+            print("You don't have that item in your inventory.")
+            return
+
     def look(self) -> None:
         """
         Display the full description of the current location.
@@ -121,6 +162,7 @@ class AdventureGame:
         """
         current_location = self.current_location_id
         print(f"LOCATION {current_location}: {self._locations[current_location].long_description}")
+        return
 
     def inventory(self) -> None:
         """
@@ -131,20 +173,24 @@ class AdventureGame:
         >>> game.inventory()
         Inventory: lucky mug
         """
-        # TODO: Display a list of all items in the player's inventory
-        
+        print(f"Inventory: {self.current_inventory}")
+        return
 
     def score(self) -> None:
         """
-        Display the player's current score.
+        Calculate and Display the player's current score.
 
         >>> game = AdventureGame('game_data.json', 1)
         >>> game.pick_up_item('lucky mug')
         >>> game.score()
-        Your current score is: 10
+        Your current inventory score is: 10
         """
-        # TODO: Display the player's current score
-
+        player_score = 0
+        for item in self.current_inventory:
+            score = self._items[item].target_points
+            player_score += score
+        return player_score
+    
     def undo(self) -> None:
         """
         Undo the last action and revert the game state to the previous event.
@@ -154,7 +200,18 @@ class AdventureGame:
         >>> game.undo()
         Last action undone. Returned to the waterfilling station.
         """
-        # TODO: Revert to the previous event in the event log and update the game state
+        if self.event_log.is_empty() or self.event_log.first == self.event_log.last:
+            print("No actions to undo.")
+            return
+        
+        self.event_log.remove_last_event()
+
+        if self.event_log.last:
+            self.current_location = self._locations[self.event_log.last.id_num]
+            print(f"Last action undone. Returned to {self.current_location.name}.")
+        else:
+            print("You are back at the starting location.")
+
 
     def log(self) -> None:
         """
@@ -168,7 +225,7 @@ class AdventureGame:
         Location: 2, Command: go east
         Location: 3, Command: go east
         """
-        # TODO: Display all events in the event log in chronological order
+        self.event_log.display_events()
 
     def quit(self) -> None:
         """
@@ -178,7 +235,8 @@ class AdventureGame:
         >>> game.quit()
         Game has been quit.
         """
-        # TODO: Exit the game gracefully
+        print("Game has been quit.")
+        exit()
 
     # Add any other necessary methods here to support the above functionalities.
 
