@@ -26,10 +26,18 @@ class Location:
     """A location in our text adventure game world.
 
     Instance Attributes:
-        - # TODO Describe each instance attribute here
+        - id_num: The unique identifier for the location.
+        - brief_description: A short description of the location, shown on subsequent visits.
+        - long_description: A detailed description of the location, shown on the first visit or when 'look' is used.
+        - available_commands: A dictionary mapping valid movement commands (e.g., 'go east') to destination location IDs.
+        - items: A list of items currently present in the location.
+        - visited: A boolean indicating whether the player has visited this location before.
+
 
     Representation Invariants:
-        - # TODO Describe any necessary representation invariants
+        - id_num must be unique for each location.
+        - available_commands keys must be valid movement directions ('go north', 'go south', 'go east', 'go west').
+        - items must contain only valid item names that exist in the game's item list.
     """
 
     # This is just a suggested starter class for Location.
@@ -42,7 +50,10 @@ class Location:
                  visited=False) -> None:
         """Initialize a new location.
 
-        # TODO Add more details here about the initialization if needed
+        The location is initialized with a unique ID, descriptions, available commands, items, and a visited flag.
+        The brief description is used for subsequent visits, while the long description is shown on the first visit
+        or when the player uses the 'look' command. Available commands define where the player can move from this
+        location, and items list the objects present in this location.
         """
 
         self.id_num = location_id
@@ -58,10 +69,15 @@ class Item:
     """An item in our text adventure game world.
 
     Instance Attributes:
-        - # TODO Describe each instance attribute here
+        - name: The name of the item.
+        - start_position: The ID of the location where the item is initially found.
+        - target_position: The ID of the location where the item needs to be delivered to score points.
+        - target_points: The number of points awarded when the item is delivered to its target position.
 
     Representation Invariants:
-        - # TODO Describe any necessary representation invariants
+        - start_position >= 0
+        - target_position >= 0
+        - target_points >= 0
     """
 
     # NOTES:
@@ -72,10 +88,11 @@ class Item:
     # The only thing you must NOT change is the name of this class: Item.
     # All item objects in your game MUST be represented as an instance of this class.
 
-    name: str
-    start_position: int
-    target_position: int
-    target_points: int
+    name: str  # The name of the item, e.g., "lucky mug", "USB drive".
+    start_position: int  # The location ID where the item starts in the game.
+    target_position: int  # The location ID where the item should be delivered.
+    target_points: int  # The number of points awarded when the item is delivered to the target position.
+
 
 
 # Note: Other entities you may want to add, depending on your game plan:
