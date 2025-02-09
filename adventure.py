@@ -90,8 +90,9 @@ class AdventureGame:
             locations[loc_data['id']] = location_obj
 
         items = []
-        # TODO: Add Item objects to the items list; your code should be structured similarly to the loop above
-        # YOUR CODE BELOW
+        for item_data in data['items']:
+            item_obj = Item(item_data['name'], item_data['description'], item_data['start_position'], item_data['target_position'], item_data['target_points'])
+            items.append(item_obj)
 
         return locations, items
 
@@ -100,8 +101,53 @@ class AdventureGame:
         If no ID is provided, return the Location object associated with the current location.
         """
 
-        # TODO: Complete this method as specified
-        # YOUR CODE BELOW
+        if loc_id is None:
+            return self.current_location_id
+        else:
+            return self._locations[loc_id]
+    
+    # TODO: Implement the 'look' function
+    # Description: When the player uses the 'look' command, display the long description of the current location. 
+    # This helps the player get detailed context about where they are and what they might find.
+    def look(self):
+        
+        pass  # Replace this with the implementation
+
+    # TODO: Implement the 'inventory' function
+    # Description: When the player uses the 'inventory' command, display all items currently in the player's possession.
+    # Ensure that the items are shown in a readable format.
+
+    def inventory(self):
+        pass  # Replace this with the implementation
+
+    # TODO: Implement the 'score' function
+    # Description: When the player uses the 'score' command, display the player's current score. 
+    # This should include points from collected items and any bonuses from specific achievements.
+
+    def score(self):
+        pass  # Replace this with the implementation
+
+    # TODO: Implement the 'undo' function
+    # Description: When the player uses the 'undo' command, revert the game to the state before the last move.
+    # Ensure that both location and inventory are accurately reverted.
+
+    def undo(self):
+        pass  # Replace this with the implementation
+
+    # TODO: Implement the 'log' function
+    # Description: When the player uses the 'log' command, display a chronological list of all actions taken so far. 
+    # This includes moves, items picked up, and any other significant events.
+
+    def log(self):
+        pass  # Replace this with the implementation
+
+    # TODO: Implement the 'quit' function
+    # Description: When the player uses the 'quit' command, end the game session gracefully. 
+    # Optionally, confirm with the player before quitting and display a summary of their progress.
+
+    def quit(self):
+        pass  # Replace this with the implementation
+
 
 
 if __name__ == "__main__":
@@ -116,7 +162,7 @@ if __name__ == "__main__":
     # })
 
     game_log = EventList()  # This is REQUIRED as one of the baseline requirements
-    game = AdventureGame('game_data.json', 1)  # load data, setting initial location ID to 1
+    game = AdventureGame('game_data.json', 9)  # load data, setting initial location ID to 1
     menu = ["look", "inventory", "score", "undo", "log", "quit"]  # Regular menu options available at each location
     choice = None
 
