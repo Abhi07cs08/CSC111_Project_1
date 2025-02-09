@@ -48,7 +48,11 @@ class Event:
     # If you want to create a special type of Event for your game that requires a different
     # set of attributes, you can create new classes using inheritance, as well.
 
-    # TODO: Add attributes below based on the provided descriptions above.
+    id_num: int  # Integer ID of the location where this event occurs.
+    description: str  # Detailed description of the location for this event.
+    next_command: Optional[str]  # Command used to move from this event to the next; None if this is the last event.
+    next: Optional[Event] = None  # Reference to the next Event object in the sequence, None if this is the last event.
+    prev: Optional[Event] = None  # Reference to the previous Event object in the sequence, None if this is the first event.
 
 
 class EventList:
@@ -56,10 +60,14 @@ class EventList:
     A linked list of game events.
 
     Instance Attributes:
-        - # TODO add descriptions of instance attributes here
+        - first: The first event in the game (None if the list is empty).
+        - last: The last event in the game (None if the list is empty).
 
     Representation Invariants:
-        - # TODO add any appropriate representation invariants, if needed
+        - If the list is empty (first is None), then last must also be None.
+        - If the list has at least one event, first and last must not be None.
+        - If first is not None, first.prev must be None (first event should not have a previous event).
+        - If last is not None, last.next must be None (last event should not have a next event).
     """
     first: Optional[Event]
     last: Optional[Event]
@@ -80,8 +88,7 @@ class EventList:
     # TODO: Complete the methods below, based on the given descriptions.
     def is_empty(self) -> bool:
         """Return whether this event list is empty."""
-
-        # TODO: Your code below
+        return self.first is None
 
     def add_event(self, event: Event, command: str = None) -> None:
         """Add the given new event to the end of this event list.
@@ -89,23 +96,45 @@ class EventList:
         event in the game.
         """
         # Hint: You should update the previous node's <next_command> as needed
+        if command is None:
+            self.first = event
+            self.last = event
+        else:
+            self.last.next = event
+            event.prev = self.last
 
-        # TODO: Your code below
+            self.last.next_command = command
+            self.last = event
+
 
     def remove_last_event(self) -> None:
         """Remove the last event from this event list.
         If the list is empty, do nothing."""
 
         # Hint: The <next_command> and <next> attributes for the new last event should be updated as needed
-
-        # TODO: Your code below
+        if self.is_empty():
+            return
+        if self.first == self.last:
+            # If there's only one event, reset both first and last pointers
+            self.first = None
+            self.last = None
+        else:
+            self.last.prev.next = None
+            self.last.prev.next_command = None
+            self.last = self.last.prev
 
     def get_id_log(self) -> list[int]:
         """Return a list of all location IDs visited for each event in this list, in sequence."""
+        ids = []
+        curr = self.first
 
-        # TODO: Your code below
+        while curr is not None:
+            ids.append(curr.id_num)
+            curr = curr.next
+        return ids
+        
 
-    # Note: You may add other methods to this class as needed
+    # Note: You may add other methods to this class as needed (need to add Lucky mmug and timer for decay coefficient)
 
 
 if __name__ == "__main__":
