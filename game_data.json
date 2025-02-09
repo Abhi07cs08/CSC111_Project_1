@@ -2,23 +2,234 @@
   "locations": [
     {
       "id": 1,
-      "name": "Bahen 1F",
-      "brief_description": "You are on the first floor of the Bahen Center. There are elevators to the West, and an exit from the building to St. George street to the East. You see something shiny on the ground -- looks like a toonie?",
-      "long_description": "You are on the first floor of the Bahen Center. It's usually crowded at this time of the day, but today it's eerily quiet. Only a few students are studying at the table near the doors. You better not disturb them. One student is rushing down the corridor, wearing a heavy-looking backpack and carrying a textbook in their arms. There are elevators to the West, and an exit from the building to St. George street to the East.",
+      "name": "Waterfilling Station",
+      "brief_description": "You are at the waterfilling station. It's unusually quiet.",
+      "long_description": "You are at the waterfilling station where students usually stop to refill their bottles. Today, it's eerily quiet except for the occasional drip from the faucet. A faint glimmer of your lucky mug catches your eye.",
       "available_commands": {
-        "go south": 4,
         "go east": 2
       },
-      "items": ["toonie"]
+      "items": ["lucky mug"]
+    },
+    {
+      "id": 2,
+      "name": "Robarts Common Entrance",
+      "brief_description": "You are at the bustling entrance of Robarts.",
+      "long_description": "You stand at the common entrance of Robarts Library. The doors creak as students shuffle in and out. Flyers litter the ground, and you feel the pressure of looming deadlines in the air.",
+      "available_commands": {
+        "go west": 1,
+        "go east": 3,
+        "go south": 6
+      },
+      "items": []
+    },
+    {
+      "id": 3,
+      "name": "Study Room 1056",
+      "brief_description": "A quiet study room with empty desks.",
+      "long_description": "You enter Study Room 1056. The scent of old coffee lingers in the air. Desks are arranged neatly, and papers are scattered on one corner. The hum of a distant air conditioner fills the silence.",
+      "available_commands": {
+        "go west": 2,
+        "go east": 4
+      },
+      "items": []
+    },
+    {
+      "id": 4,
+      "name": "Study Room 1057",
+      "brief_description": "You are in another study room, slightly warmer.",
+      "long_description": "Study Room 1057 feels warmer than the last. The windows are fogged up, and someone has left motivational sticky notes on the walls.",
+      "available_commands": {
+        "go west": 3,
+        "go south": 7
+      },
+      "items": []
+    },
+    {
+      "id": 5,
+      "name": "Classroom 1065",
+      "brief_description": "You are in Classroom 1065. It's empty and echoey.",
+      "long_description": "Classroom 1065 is empty, the chairs neatly aligned. The echo of your footsteps fills the room. The whiteboard still has equations from a previous lecture.",
+      "available_commands": {
+        "go south": 8
+      },
+      "items": ["notebook"]
+    },
+    {
+      "id": 6,
+      "name": "Soccer Field",
+      "brief_description": "You are on the soccer field, the grass slightly wet.",
+      "long_description": "The soccer field stretches before you, the grass damp from the morning dew. The goals stand empty, and a lone soccer ball rests near the center.",
+      "available_commands": {
+        "go south": 10,
+        "go north": 2
+      },
+      "items": ["soccer ball"]
+    },
+    {
+      "id": 7,
+      "name": "Elevator",
+      "brief_description": "You are by the elevator. It's humming softly.",
+      "long_description": "The elevator hums quietly, its display flickering between floors. The button panel is slightly worn out, and you spot a USB drive resting on a nearby bench you were sitting on yesterday! IT HAD FALLEN OUT OF YOUR POCKET!!!",
+      "available_commands": {
+        "go west": -1,
+        "go north": 4,
+        "go south": 12
+      },
+      "items": ["USB drive"]
+    },
+    {
+      "id": 8,
+      "name": "Sydney Smith",
+      "brief_description": "You are in Sydney Smith Hall. It's bustling with activity.",
+      "long_description": "Sydney Smith Hall is alive with students rushing between classes. The sound of conversations and footsteps reverberates through the corridors.",
+      "available_commands": {
+        "go north": -1,
+        "go east": 9,
+        "go south": 13
+      },
+      "items": []
+    },
+    {
+      "id": 9,
+      "name": "Dorm Room",
+      "brief_description": "You are in your dorm room. This is your safe haven.",
+      "long_description": "Your dorm room is a mess of notes and empty coffee cups. This is where you'll need to return with all your items to win the game.",
+      "available_commands": {
+        "go west": 8,
+        "go east": 10
+      },
+      "items": []
+    },
+    {
+      "id": 10,
+      "name": "Cafe",
+      "brief_description": "You are at the campus cafe. The aroma of coffee fills the air.",
+      "long_description": "The campus cafe is bustling with students grabbing quick bites. The smell of freshly brewed coffee is tempting. You miss your lucky mug, it always did wonders here.",
+      "available_commands": {
+        "go west": 9,
+        "go east": 11,
+        "go north": 6
+      },
+      "items": ["charger", "coffee"]
+    },
+    {
+      "id": 11,
+      "name": "Gerstein Library",
+      "brief_description": "You are in Gerstein Library. It's quiet and serene.",
+      "long_description": "Gerstein Library is quiet, with students engrossed in their books. The large windows let in streams of light, creating a peaceful study environment.",
+      "available_commands": {
+        "go west": 10,
+        "go east": 12,
+        "go south": 14
+      },
+      "items": ["Anthony's library card"]
+    },
+    {
+      "id": 12,
+      "name": "Commons Exit",
+      "brief_description": "You are at the exit of the Commons. Fresh air greets you.",
+      "long_description": "The exit of the Commons opens to a small courtyard. The sound of birds chirping greets you as you step outside.",
+      "available_commands": {
+        "go west": 11,
+        "go north": 7
+      },
+      "items": ["bike"]
+    },
+    {
+      "id": 13,
+      "name": "Math Learning Center",
+      "brief_description": "You are in the Math Learning Center. The air smells of chalk.",
+      "long_description": "The Math Learning Center is filled with whiteboards covered in equations. The faint smell of chalk hangs in the air.",
+      "available_commands": {
+        "go north": 8
+      },
+      "items": ["calculator"]
+    },
+    {
+      "id": 14,
+      "name": "Lower Floor Gerstein",
+      "brief_description": "You are on the lower floor of Gerstein Library.",
+      "long_description": "NPC HINT The lower floor of Gerstein Library is quieter, with rows of bookshelves and study carrels. The fluorescent lights flicker slightly.",
+      "available_commands": {
+        "go north": 11,
+        "go east": 15
+      },
+      "items": []
+    },
+    {
+      "id": 15,
+      "name": "Upper Floor Gerstein",
+      "brief_description": "You are on the upper floor of Gerstein Library.",
+      "long_description": "NPC HINT The upper floor of Gerstein Library has large tables and group study areas. The view from the windows is calming.",
+      "available_commands": {
+        "go west": 14
+      },
+      "items": []
     }
   ],
   "items": [
     {
-      "name": "toonie",
-      "description": "There is a toonie on the ground. Someone must have dropped it.",
+      "name": "lucky mug",
+      "description": "Your cherished lucky mug, essential for your confidence.",
       "start_position": 1,
-      "target_position": 4,
+      "target_position": 9,
+      "target_points": 10
+    },
+    {
+      "name": "USB drive",
+      "description": "The USB drive containing your project files.",
+      "start_position": 7,
+      "target_position": 9,
+      "target_points": 15
+    },
+    {
+      "name": "charger",
+      "description": "Your laptop charger, necessary to power your device.",
+      "start_position": 10,
+      "target_position": 9,
       "target_points": 5
+    },
+    {
+      "name": "soccer ball",
+      "description": "A slightly deflated soccer ball from the field.",
+      "start_position": 6,
+      "target_position": 9,
+      "target_points": 3
+    },
+    {
+      "name": "notebook",
+      "description": "your forgotten notebook filled with lecture notes, looks like the lack of sleep is getting to you hey?",
+      "start_position": 5,
+      "target_position": 9,
+      "target_points": 4
+    },
+    {
+      "name": "coffee",
+      "description": "A hot cup of coffee, perfect to fuel your study session.",
+      "start_position": 10,
+      "target_position": 9,
+      "target_points": 2
+    },
+    {
+      "name": "Anthony's library card",
+      "description": "Your Friend's lost library card, he spends a lot of time at the MLC, perhaps this calls for a side quest??",
+      "start_position": 11,
+      "target_position": 5,
+      "target_points": 10
+    },
+    {
+      "name": "bike",
+      "description": "Your trusty bike, perfect for a quick escape.",
+      "start_position": 12,
+      "target_position": 9,
+      "target_points": 8
+    },
+    {
+      "name": "calculator",
+      "description": "A scientific calculator, essential for math exams.",
+      "start_position": 13,
+      "target_position": 9,
+      "target_points": 7
     }
   ]
 }
