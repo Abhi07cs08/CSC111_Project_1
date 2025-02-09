@@ -105,48 +105,83 @@ class AdventureGame:
             return self.current_location_id
         else:
             return self._locations[loc_id]
-    
-    # TODO: Implement the 'look' function
-    # Description: When the player uses the 'look' command, display the long description of the current location. 
-    # This helps the player get detailed context about where they are and what they might find.
-    def look(self):
+
+    def look(self) -> None:
+        """
+        Display the full description of the current location.
+
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.look()
+        LOCATION 1: You are at the waterfilling station where students usually stop to refill their bottles. Today, it's eerily quiet except for the occasional drip from the faucet. A faint glimmer of your lucky mug catches your eye.
+
+        >>> game.move("go east")
+        >>> game.look()
+        LOCATION 2: You stand at the common entrance of Robarts Library. The doors creak as students shuffle in and out. Flyers litter the ground, and you feel the pressure of looming deadlines in the air.
+
+        """
+        current_location = self.current_location_id
+        print(f"LOCATION {current_location}: {self._locations[current_location].long_description}")
+
+    def inventory(self) -> None:
+        """
+        Display the items currently in the player's inventory.
+
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.pick_up_item('lucky mug')
+        >>> game.inventory()
+        Inventory: lucky mug
+        """
+        # TODO: Display a list of all items in the player's inventory
         
-        pass  # Replace this with the implementation
 
-    # TODO: Implement the 'inventory' function
-    # Description: When the player uses the 'inventory' command, display all items currently in the player's possession.
-    # Ensure that the items are shown in a readable format.
+    def score(self) -> None:
+        """
+        Display the player's current score.
 
-    def inventory(self):
-        pass  # Replace this with the implementation
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.pick_up_item('lucky mug')
+        >>> game.score()
+        Your current score is: 10
+        """
+        # TODO: Display the player's current score
 
-    # TODO: Implement the 'score' function
-    # Description: When the player uses the 'score' command, display the player's current score. 
-    # This should include points from collected items and any bonuses from specific achievements.
+    def undo(self) -> None:
+        """
+        Undo the last action and revert the game state to the previous event.
 
-    def score(self):
-        pass  # Replace this with the implementation
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.move("go east")
+        >>> game.undo()
+        Last action undone. Returned to the waterfilling station.
+        """
+        # TODO: Revert to the previous event in the event log and update the game state
 
-    # TODO: Implement the 'undo' function
-    # Description: When the player uses the 'undo' command, revert the game to the state before the last move.
-    # Ensure that both location and inventory are accurately reverted.
+    def log(self) -> None:
+        """
+        Display a chronological list of all events (locations visited, commands chosen).
 
-    def undo(self):
-        pass  # Replace this with the implementation
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.move("go east")
+        >>> game.move("go east")
+        >>> game.log()
+        Location: 1, Command: None
+        Location: 2, Command: go east
+        Location: 3, Command: go east
+        """
+        # TODO: Display all events in the event log in chronological order
 
-    # TODO: Implement the 'log' function
-    # Description: When the player uses the 'log' command, display a chronological list of all actions taken so far. 
-    # This includes moves, items picked up, and any other significant events.
+    def quit(self) -> None:
+        """
+        Quit the game.
 
-    def log(self):
-        pass  # Replace this with the implementation
+        >>> game = AdventureGame('game_data.json', 1)
+        >>> game.quit()
+        Game has been quit.
+        """
+        # TODO: Exit the game gracefully
 
-    # TODO: Implement the 'quit' function
-    # Description: When the player uses the 'quit' command, end the game session gracefully. 
-    # Optionally, confirm with the player before quitting and display a summary of their progress.
+    # Add any other necessary methods here to support the above functionalities.
 
-    def quit(self):
-        pass  # Replace this with the implementation
 
 
 
